@@ -56,7 +56,8 @@ Bun.serve({
       url = url.startsWith("https://") ? url : `https://${url}`;
 
       const browser = await puppeteer.connect({
-        browserWSEndpoint: process.env.BROWSER_URL,
+        browserWSEndpoint:
+          "wss://chrome.browserless.io?token=2c27643a-0f80-495c-afe2-3f7632965b9e",
       });
 
       const page = await browser.newPage();
