@@ -90,7 +90,7 @@ export default function InfoAndForm({ inputRef, loading }: any) {
             type="submit"
             className={`${loading ? "animate-pulse" : ""}`}
           >
-            screenshot!
+            screenshot
           </Button>
         </div>
       </motion.div>
