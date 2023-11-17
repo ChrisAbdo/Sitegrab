@@ -129,6 +129,7 @@ export const Form = () => {
             aria-label="Copy code"
             size="icon"
             variant="secondary"
+            type="button"
             className="absolute top-5 right-0.5 transform -translate-y-1/2 cursor-pointer flex justify-center items-center"
           >
             <MotionConfig transition={{ duration: 0.15 }}>

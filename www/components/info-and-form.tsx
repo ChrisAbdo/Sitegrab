@@ -59,18 +59,18 @@ export default function InfoAndForm({ inputRef, loading }: any) {
       className="space-y-2 sm:space-y-4"
     >
       <motion.div variants={FADE_UP_ANIMATION_VARIANTS}>
-        <Badge variant="secondary" className="w-fit">
+        <Badge variant="secondary" className="w-fit font-light">
           v0.1.0
         </Badge>
       </motion.div>
       <motion.div variants={FADE_UP_ANIMATION_VARIANTS}>
-        <h1 className="flex items-center leading-6 text-2xl sm:text-4xl font-bold">
+        <h1 className="flex items-center leading-6 text-2xl sm:text-4xl font-light">
           <CameraIcon className="h-8 w-8 mr-2" />
           Sitegrab
         </h1>
       </motion.div>
       <motion.div variants={FADE_UP_ANIMATION_VARIANTS}>
-        <h1 className="leading-6 text-sm sm:text-lg  mb-4">
+        <h1 className="leading-6 text-sm sm:text-lg font-light mb-4">
           take screenshots of sites in seconds
         </h1>
       </motion.div>

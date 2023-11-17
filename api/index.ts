@@ -2,7 +2,7 @@ import puppeteer from "puppeteer-core";
 import { put } from "@vercel/blob";
 import { z } from "zod";
 
-console.log("🚀 Starting up on port " + process.env.PORT);
+console.log("🚀 Starting port " + process.env.PORT);
 
 const headers = {
   base: {
@@ -15,7 +15,6 @@ const headers = {
 const schema = z.object({
   url: z.string(),
   upload: z.string().optional(),
-  scripts: z.array(z.string()).optional(),
 });
 
 Bun.serve({
@@ -25,7 +24,6 @@ Bun.serve({
     try {
       let url = "";
       let upload: string;
-      let scripts: string[] = [];
 
       if (request.method === "GET") {
         const { searchParams } = new URL(request.url);
@@ -33,13 +31,15 @@ Bun.serve({
         url = searchParams.get("url") as string;
         upload = searchParams.get("upload") || "";
 
-        if (!url) return new Response("Add ?url=example.com to the URL");
+        if (!url)
+          return new Response(
+            "Welcome to Sitegrab API!\n\nThe rest is simple: just put ?url=DOMAIN_HERE in the URL.\n\nFor example, https://sitegrab-production.up.railway.app/?url=google.com"
+          );
       } else {
         const body = (await request.json()) as any;
 
         url = body.url;
         upload = body.upload;
-        scripts = body.scripts;
 
         if (!url) return new Response('Pass { "url": "example.com" } in body');
       }
@@ -48,16 +48,16 @@ Bun.serve({
       schema.parse({
         url,
         upload,
-        scripts,
       });
 
       console.log(`📸 Taking screenshot of ${url}`);
 
+      // Add https if not already
       url = url.startsWith("https://") ? url : `https://${url}`;
 
+      // Connect to browserless
       const browser = await puppeteer.connect({
-        browserWSEndpoint:
-          "wss://chrome.browserless.io?token=2c27643a-0f80-495c-afe2-3f7632965b9e",
+        browserWSEndpoint: process.env.BROWSER_URL,
       });
 
       const page = await browser.newPage();
@@ -65,12 +65,6 @@ Bun.serve({
       // Wait until network activity settles to 2 req/s
       await page.goto(url, { waitUntil: "networkidle2" });
       await page.setViewport({ width: 1920, height: 1200 });
-
-      // Run scripts on page
-      for (const script of scripts) {
-        console.log("🏃 Running: " + script);
-        await page.evaluate(script, script);
-      }
 
       const screenshot = await page.screenshot();
 
