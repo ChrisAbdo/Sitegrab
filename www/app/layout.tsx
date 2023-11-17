@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@abdo_eth",
   },
-  metadataBase: new URL("https://sitegrab.vercel.app/"),
+  metadataBase: new URL("https://sitegrab.chrisabdo.dev/"),
 };
 
 export default function RootLayout({
