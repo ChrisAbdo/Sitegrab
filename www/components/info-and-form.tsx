@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { Badge } from "./ui/badge";
 import { CameraIcon } from "@radix-ui/react-icons";
@@ -13,37 +14,6 @@ const FADE_UP_ANIMATION_VARIANTS = {
 
 export default function InfoAndForm({ inputRef, loading }: any) {
   return (
-    // <div className="space-y-2 sm:space-y-4">
-    // <Badge variant="secondary" className="w-fit">
-    //   v0.1.0
-    // </Badge>
-    // <h1 className="flex items-center leading-6 text-2xl sm:text-4xl font-bold">
-    //   <CameraIcon className="h-8 w-8 mr-2" />
-    //   Sitegrab
-    // </h1>
-    // <h1 className="leading-6 text-sm sm:text-lg  mb-4">
-    //   take beautiful screenshots of any site in seconds
-    // </h1>
-
-    // <div className="flex gap-2">
-    //   <Input
-    //     ref={inputRef}
-    //     name="url"
-    //     type="text"
-    //     placeholder="https://chrisabdo.dev"
-    //     className="bg-background"
-    //     autoComplete="off"
-    //   />
-
-    //   <Button
-    //     disabled={loading}
-    //     type="submit"
-    //     className={`${loading ? "animate-pulse" : ""}`}
-    //   >
-    //     Take screenshot
-    //   </Button>
-    // </div>
-    // </div>
     <motion.div
       initial="hidden"
       animate="show"
@@ -81,17 +51,24 @@ export default function InfoAndForm({ inputRef, loading }: any) {
             name="url"
             type="text"
             placeholder="ex: https://chrisabdo.dev"
-            className="bg-background"
+            className="bg-muted"
             autoComplete="off"
+            spellCheck={false}
           />
 
-          <Button
-            disabled={loading}
-            type="submit"
-            className={`${loading ? "animate-pulse" : ""}`}
-          >
-            screenshot
-          </Button>
+          {loading ? (
+            <Button disabled={loading} className="min-w-[100px]">
+              <span className="inline-flex items-center gap-px">
+                <span className="animate-blink mx-px h-1.5 w-1.5 rounded-full bg-background"></span>
+                <span className="animate-blink animation-delay-200 mx-px h-1.5 w-1.5 rounded-full bg-background"></span>
+                <span className="animate-blink animation-delay-[400ms] mx-px h-1.5 w-1.5 rounded-full bg-background"></span>
+              </span>
+            </Button>
+          ) : (
+            <Button type="submit" className="min-w-[100px]">
+              Screenshot
+            </Button>
+          )}
         </div>
       </motion.div>
     </motion.div>

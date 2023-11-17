@@ -100,23 +100,14 @@ export const Form = () => {
           variant="secondary"
           size="icon"
         >
-          <DownloadIcon className="h-[1.2rem] w-[1.2rem]" href={img} />
+          {/* <DownloadIcon className="h-[1.2rem] w-[1.2rem]" href={img} /> */}
+          <a download className="no-underline" href={img}>
+            <DownloadIcon className="h-[1.2rem] w-[1.2rem]" href={img} />
+          </a>
         </Button>
       </div>
 
       {img ? (
-        // <div className="flex w-full flex-wrap items-center justify-between gap-2">
-        //   <code className="grow">{endpoint}</code>
-        //   <button
-        //     type="button"
-        //     onClick={() => {
-        //       toast.success("Copied to clipboard");
-        //       copyToClipboard(endpoint);
-        //     }}
-        //   >
-        //     Copy
-        //   </button>
-        // </div>
         <code
           className="px-2 py-3 rounded-md font-mono text-sm relative cursor-copy border flex items-center bg-background"
           onClick={onCopy}
