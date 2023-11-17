@@ -48,7 +48,7 @@ export default function RootLayout({
           <GridPattern width={20} height={20} x={-1} y={-1} className="-z-10" />
           <Container>{children}</Container>
           <Footer />
-          <Toaster position="top-center" />
+          <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>
     </html>
